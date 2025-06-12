@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CVisionary - Features</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      }
+
+      :root {
+        --primary: #a1c9ff;
+        --primary-dark: #4997ff;
+        --primary-light: #818cf8;
+        --secondary: #cca6ff;
+        --gray-50: #f9fafb;
+        --gray-100: #f3f4f6;
+        --gray-200: #e5e7eb;
+        --gray-300: #d1d5db;
+        --gray-400: #9ca3af;
+        --gray-500: #6b7280;
+        --gray-600: #4b5563;
+        --gray-700: #374151;
+        --gray-800: #1f2937;
+        --gray-900: #111827;
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+
+      body {
+        background-color: var(--gray-50);
+        color: var(--gray-900);
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 0 40px;
+      }
+
+      header {
+        background-color: white;
+        box-shadow: var(--shadow-sm);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        padding: 0 40px;
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0;
+        max-width: 1440px;
+        margin: 0 auto;
+        height: 80px;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+      }
+
+      .logo span {
+        color: var(--gray-900);
+      }
+
+      .logo-icon {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-light)
+        );
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 20px;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 40px;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--gray-600);
+        font-weight: 500;
+        transition: all 0.3s ease;
+        font-size: 1.05rem;
+        position: relative;
+        padding: 6px 2px;
+      }
+
+      .nav-links a:hover, .nav-links a.active {
+        color: var(--primary);
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 3px;
+        bottom: -3px;
+        left: 0;
+        background-color: var(--primary);
+        transition: width 0.3s ease;
+        border-radius: 2px;
+      }
+
+      .nav-links a:hover::after, .nav-links a.active::after {
+        width: 100%;
+      }
+
+      .auth-buttons {
+        display: flex;
+        gap: 20px;
+      }
+
+      .btn {
+        padding: 12px 24px;
+        border-radius: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: none;
+        font-size: 1rem;
+      }
+
+      .btn-outline {
+        background-color: transparent;
+        border: 2px solid var(--primary);
+        color: var(--primary);
+      }
+
+      .btn-outline:hover {
+        background-color: var(--primary);
+        color: white;
+      }
+
+      .btn-primary {
+        background-color: var(--primary);
+        color: white;
+        box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3);
+      }
+
+      .btn-primary:hover {
+        background-color: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
+      }
+
+      /* Page Hero */
+      .page-hero {
+        padding-top: 160px;
+        padding-bottom: 80px;
+        background: linear-gradient(to bottom, #ffffff, var(--gray-100));
+        position: relative;
+        overflow: hidden;
+      }
+
+      .page-hero::before {
+        content: "";
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        background: linear-gradient(
+          135deg,
+          rgba(79, 70, 229, 0.1),
+          rgba(129, 140, 248, 0.1)
+        );
+        border-radius: 50%;
+        top: -300px;
+        right: -200px;
+        z-index: 0;
+      }
+
+      .page-title-wrapper {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+      }
+
+      .page-tag {
+        display: inline-block;
+        background-color: rgba(79, 70, 229, 0.1);
+        color: var(--primary-dark);
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+      }
+
+      .page-title {
+        font-size: 4rem;
+        font-weight: 800;
+        margin-bottom: 24px;
+        color: var(--gray-900);
+      }
+
+      .page-description {
+        color: var(--gray-600);
+        font-size: 1.3rem;
+        line-height: 1.7;
+        margin-bottom: 40px;
+      }
+
+      /* Feature sections */
+      .feature-section {
+        padding: 100px 0;
+        position: relative;
+      }
+
+      .feature-section:nth-child(even) {
+        background-color: white;
+      }
+
+      .feature-section:nth-child(odd) {
+        background-color: var(--gray-50);
+      }
+
+      .feature-container {
+        display: flex;
+        align-items: center;
+        gap: 80px;
+      }
+
+      .feature-section:nth-child(even) .feature-container {
+        flex-direction: row-reverse;
+      }
+
+      .feature-content {
+        flex: 1;
+      }
+
+      .feature-subtitle {
+        color: var(--primary-dark);
+        font-weight: 600;
+        margin-bottom: 16px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .feature-icon-small {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        background-color: var(--primary);
+        color: white;
+        border-radius: 50%;
+        font-size: 0.8rem;
+      }
+
+      .feature-title {
+        font-size: 2.8rem;
+        font-weight: 800;
+        margin-bottom: 24px;
+        color: var(--gray-900);
+      }
+
+      .feature-description {
+        color: var(--gray-600);
+        font-size: 1.2rem;
+        line-height: 1.7;
+        margin-bottom: 30px;
+      }
+
+      .feature-list {
+        margin-bottom: 40px;
+      }
+
+      .feature-item {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+
+      .feature-item-icon {
+        width: 28px;
+        height: 28px;
+        min-width: 28px;
+        background-color: rgba(79, 70, 229, 0.1);
+        color: var(--primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 3px;
+      }
+
+      .feature-item-content h4 {
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-bottom: 6px;
+        color: var(--gray-800);
+      }
+
+      .feature-item-content p {
+        color: var(--gray-600);
+        font-size: 1.05rem;
+        line-height: 1.6;
+      }
+
+      .feature-image {
+        flex: 1;
+        position: relative;
+      }
+
+      .feature-img-wrapper {
+        position: relative;
+        width: 100%;
+        height: 500px;
+      }
+
+      .feature-main-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 24px;
+        box-shadow: var(--shadow-lg);
+      }
+
+      .floating-card {
+        position: absolute;
+        background-color: white;
+        border-radius: 20px;
+        box-shadow: var(--shadow-md);
+        padding: 20px;
+        z-index: 2;
+      }
+
+      .card-1 {
+        bottom: -30px;
+        right: 30px;
+        width: 260px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .card-1-icon {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-light)
+        );
+        color: white;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+      }
+
+      .card-1-content h4 {
+        font-weight: 700;
+        margin-bottom: 4px;
+      }
+
+      .card-1-content p {
+        color: var(--gray-500);
+        font-size: 0.9rem;
+      }
+
+      .card-2 {
+        top: 40px;
+        left: -30px;
+        padding: 15px 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--primary-dark);
+        font-weight: 600;
+      }
+
+      .card-2 i {
+        font-size: 1.2rem;
+      }
+
+      .progress-stats {
+        padding: 30px;
+        background: white;
+        border-radius: 20px;
+        box-shadow: var(--shadow-md);
+        margin-top: 40px;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+      }
+
+      .stat-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .stat-card-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(
+          135deg,
+          rgba(79, 70, 229, 0.1),
+          rgba(129, 140, 248, 0.1)
+        );
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.6rem;
+        color: var(--primary);
+        margin-bottom: 15px;
+      }
+
+      .stat-card-title {
+        font-size: 1.8rem;
+        font-weight: 800;
+        margin-bottom: 8px;
+        color: var(--primary);
+      }
+
+      .stat-card-description {
+        color: var(--gray-600);
+        font-size: 1rem;
+      }
+
+      /* Resources section */
+      .resources {
+        padding: 120px 0;
+        background: linear-gradient(
+          to bottom,
+          var(--gray-50),
+          white
+        );
+      }
+
+      .resources-title-wrapper {
+        text-align: center;
+        max-width: 700px;
+        margin: 0 auto 60px;
+      }
+
+      .resources-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+      }
+
+      .resource-card {
+        background-color: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: all 0.3s ease;
+      }
+
+      .resource-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .resource-image {
+        height: 200px;
+        width: 100%;
+        object-fit: cover;
+      }
+
+      .resource-content {
+        padding: 30px;
+      }
+
+      .resource-category {
+        display: inline-block;
+        padding: 5px 12px;
+        background-color: rgba(79, 70, 229, 0.1);
+        color: var(--primary-dark);
+        border-radius: 15px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+      }
+
+      .resource-title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 12px;
+        color: var(--gray-900);
+      }
+
+      .resource-description {
+        color: var(--gray-600);
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+
+      .resource-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--primary);
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .resource-link:hover {
+        gap: 12px;
+      }
+
+      /* FAQ Section */
+
+
+
+      .faq-section {
+        padding: 120px 0;
+        position: relative;
+      }
+
+      .faq-section::before {
+        content: "";
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        background: linear-gradient(
+          135deg,
+          rgba(16, 185, 129, 0.05),
+          rgba(59, 130, 246, 0.05)
+        );
+        border-radius: 50%;
+        top: -300px;
+        left: -300px;
+        z-index: 0;
+      }
+
+      .faq-list {
+        max-width: 900px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+      }
+
+      .faq-item {
+        background-color: white;
+        border-radius: 16px;
+        margin-bottom: 20px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .faq-question {
+        padding: 25px 30px;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 600;
+        font-size: 1.2rem;
+        color: var(--gray-800);
+        transition: all 0.3s ease;
+      }
+
+      .faq-question:hover {
+        color: var(--primary);
+      }
+
+      .faq-question.active {
+        color: var(--primary);
+        background-color: rgba(79, 70, 229, 0.05);
+      }
+
+      .faq-question i {
+        transition: all 0.3s ease;
+      }
+
+      .faq-question.active i {
+        transform: rotate(180deg);
+      }
+
+      .faq-answer {
+        padding: 0 30px;
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .faq-answer.show {
+        padding: 0 30px 25px;
+        max-height: 500px;
+      }
+
+      .faq-answer-content {
+        color: var(--gray-600);
+        font-size: 1.1rem;
+        line-height: 1.7;
+      }
+
+      /* CTA section */
+      .cta {
+        padding: 120px 0;
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-dark)
+        );
+        color: white;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cta::before,
+      .cta::after {
+        content: "";
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        z-index: 0;
+      }
+
+      .cta::before {
+        top: -150px;
+        left: -150px;
+      }
+
+      .cta::after {
+        bottom: -150px;
+        right: -150px;
+      }
+
+      .cta-content {
+        position: relative;
+        z-index: 1;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .cta-title {
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin-bottom: 24px;
+      }
+
+      .cta-description {
+        font-size: 1.3rem;
+        margin-bottom: 40px;
+        opacity: 0.9;
+      }
+
+      .cta-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+      }
+
+      .btn-light {
+        background-color: white;
+        color: var(--primary);
+      }
+
+      .btn-light:hover {
+        background-color: rgba(255, 255, 255, 0.9);
+        transform: translateY(-2px);
+      }
+
+      .btn-outline-light {
+        background-color: transparent;
+        border: 2px solid white;
+        color: white;
+      }
+
+      .btn-outline-light:hover {
+        background-color: white;
+        color: var(--primary);
+        transform: translateY(-2px);
+      }
+
+      .cta-buttons .btn {
+        padding: 16px 32px;
+        font-weight: 600;
+        font-size: 1.1rem;
+      }
+
+      /* Footer */
+      footer {
+        background-color: var(--gray-900);
+        color: var(--gray-400);
+        padding: 100px 0 40px;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 60px;
+        margin-bottom: 60px;
+      }
+
+      .footer-logo {
+        color: white;
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .footer-logo-icon {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-light)
+        );
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 20px;
+      }
+
+      .footer-description {
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin-bottom: 30px;
+        opacity: 0.7;
+      }
+
+      .social-icons {
+        display: flex;
+        gap: 16px;
+      }
+
+      .social-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        font-size: 1.2rem;
+        color: white;
+      }
+
+      .social-icon:hover {
+        background-color: var(--primary);
+        transform: translateY(-3px);
+      }
+
+      .footer-heading {
+        color: white;
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 30px;
+      }
+
+      .footer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .footer-links a {
+        color: var(--gray-400);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-size: 1.05rem;
+      }
+
+      .footer-links a:hover {
+        color: white;
+        transform: translateX(5px);
+      }
+
+      .footer-bottom {
+        padding-top: 40px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .footer-bottom-links {
+        display: flex;
+        gap: 30px;
+      }
+
+      .footer-bottom-links a {
+        color: var(--gray-500);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-size: 0.95rem;
+      }
+
+      .footer-bottom-links a:hover {
+        color: white;
+      } 
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href= "{{ url_for('index') }}" class="logo">
+          <div class="logo-icon">
+            <i class="fas fa-brain"></i>
+          </div>
+          CVisionary
+        </a>
+        <div class="nav-links">
+          <a href="{{ url_for('features') }}" class="active">Features</a>
+          <a href="#">Workflow</a>
+          <a href="#">Pricing</a>
+          <a href="{{ url_for('upload') }}">Upload</a>
+          <a href="#">About Us</a>
+        </div>
+        <div class="auth-buttons">
+          <button class="btn btn-outline">Log In</button>
+          <button class="btn btn-primary">Get Started</button>
+        </div>
+      </nav>
+    </header>
+
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-title-wrapper">
+          <span class="page-tag">FEATURES</span>
+          <h1 class="page-title">Find Your Dream Job with AI</h1>
+          <p class="page-description">
+            Our AI-powered platform analyzes your resume, identifies the best job matches, and provides personalized improvement suggestions to help you advance your career.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-section">
+      <div class="container">
+        <div class="feature-container">
+          <div class="feature-content">
+            <p class="feature-subtitle">
+              <span class="feature-icon-small"><i class="fas fa-bolt"></i></span>
+              INTELLIGENT JOB MATCHING
+            </p>
+            <h2 class="feature-title">Get Personalized Job Recommendations</h2>
+            <p class="feature-description">
+              Upload your resume, and our advanced AI analyzes your skills, experience, and career goals to recommend jobs that are the perfect match for your profile.
+            </p>
+            <div class="feature-list">
+              <div class="feature-item">
+                <div class="feature-item-icon">
+                  <i class="fas fa-check"></i>
+                </div>
+                <div class="feature-item-content">
+                  <h4>93% Match Accuracy</h4>
+                  <p>Our AI uses natural language processing to understand the nuances of your experience and skills, resulting in highly accurate job recommendations.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-item-icon">
+                  <i class="fas fa-check"></i>
+                </div>
+                <div class="feature-item-content">
+                  <h4>Personalized to Your Career Goals</h4>
+                  <p>Tell us where you want to go in your career, and we'll find opportunities that align with your future aspirations, not just your past experience.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-item-icon">
+                  <i class="fas fa-check"></i>
+                </div>
+                <div class="feature-item-content">
+                  <h4>Daily Updates</h4>
+                  <p>Receive new job matches daily based on your profile and preferences, ensuring you never miss out on the perfect opportunity.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="feature-image">
+            <div class="feature-img-wrapper">
+              <img src="images/job-matching-recommendation.jpg" alt="Job Matching" class="feature-main-image" />
+              <div class="floating-card card-1">
+                <div class="card-1-icon">
+                  <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="card-1-content">
+                  <h4>93% Match</h4>
+                  <p>Perfect for your skills</p>
+                </div>
+              </div>
+              <div class="floating-card card-2">
+                <i class="fas fa-bolt"></i>
+                <span>New matches today</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-section">
+      <div class="container">
+        <div class="feature-container">
+          <div class="feature-content">
+            <p class="feature-subtitle">
+              <span class="feature-icon-small"><i class="fas fa-chart-bar"></i></span>
+              RESUME ANALYSIS
+            </p>
+            <h2 class="feature-title">Understand Your Professional Profile</h2>
+            <p class="feature-description">
+              Get detailed insights about your professional profile. Our AI identifies your strengths, skill gaps, and provides suggestions to make your resume stand out to potential employers.
+            </p>
+            <div class="feature-list">
+              <div class="feature-item">
+                <div class="feature-item-icon">
+                  <i class="fas fa-check"></i>
+                </div>
+                <div class="feature-item-content">
+                  <h4>Skills Analysis</h4>
+                  <p>Get a comprehensive breakdown of your technical and soft skills, with insights on which are most valuable in your target industry.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-item-icon">
+                  <i class="fas fa-check"></i>
+                </div>
+                <div class="feature-item-content">
+                  <h4>Resume Optimization</h4>
+                  <p>Receive actionable suggestions to improve your resume based on industry standards and what employers are looking for in your field.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-item-icon">
+                  <i class="fas fa-check"></i>
+                </div>
+                <div class="feature-item-content">
+                  <h4>Industry Benchmarking</h4>
+                  <p>See how your skills and experience compare to others in your field, and identify areas for professional development.</p>
+                </div>
+              </div>
+            </div>
+            <div class="progress-stats">
+              <div class="stats-grid">
+                <div class="stat-card">
+                  <div class="stat-card-icon">
+                    <i class="fas fa-user-check"></i>
+                  </div>
+                  <h3 class="stat-card-title">98%</h3>
+                  <p class="stat-card-description">Resume Analysis Accuracy</p>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-card-icon">
+                    <i class="fas fa-lightbulb"></i>
+                  </div>
+                  <h3 class="stat-card-title">15+</h3>
+                  <p class="stat-card-description">Improvement Suggestions</p>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-card-icon">
+                    <i class="fas fa-chart-line"></i>
+                  </div>
+                  <h3 class="stat-card-title">3x</h3>
+                  <p class="stat-card-description">Higher Interview Rate</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="feature-image">
+            <div class="feature-img-wrapper">
+              <img src="images/resuleanalysis1.jpg" alt="Resume Analysis" class="feature-main-image" />
+              <div class="floating-card card-1">
+                <div class="card-1-icon">
+                  <i class="fas fa-chart-pie"></i>
+                </div>
+                <div class="card-1-content">
+                  <h4>Skills Analysis</h4>
+                  <p>See your strengths</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-section">
+      <div class="container">
+        <div class="feature-container">
+          <div class="feature-content">
+            <p class="feature-subtitle">
+              <span class="feature-icon-small"><i class="fas fa-cogs"></i></span>
+              CAREER DEVELOPMENT
+            </p>
+            <h2 class="feature-title">Accelerate Your Professional Growth</h2>
+            <p class="feature-description">
+              Beyond finding jobs, our platform helps you continuously improve your professional skills and advance your career with personalized learning resources and development plans.
+            </p>
+            <div class="feature-list">
+              <div class="feature-item">
+                <div class="feature-item-icon">
+                  <i class="fas fa-check"></i>
+                </div>
+                <div class="feature-item-content">
+                  <h4>Skills Gap Analysis</h4>
+                  <p>Identify which skills you need to develop to reach your career goals and access curated resources to help you build those competencies.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-item-icon">
+                  <i class="fas fa-check"></i>
+                </div>
+                <div class="feature-item-content">
+                  <h4>Personalized Learning Paths</h4>
+                  <p>Get customized recommendations for courses, certifications, and learning materials based on your career objectives and current skill level.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-item-icon">
+                  <i class="fas fa-check"></i>
+                </div>
+                <div class="feature-item-content">
+                  <h4>Progress Tracking</h4>
+                  <p>Monitor your professional growth over time with detailed analytics and achievement milestones to keep you motivated.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="feature-image">
+            <div class="feature-img-wrapper">
+              <img src="images/career dev.jpg" alt="Career Development" class="feature-main-image" />
+              <div class="floating-card card-1">
+                <div class="card-1-icon">
+                  <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="card-1-content">
+                  <h4>Learning Path</h4>
+                  <p>Customized for you</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="resources">
+      <div class="container">
+        <div class="resources-title-wrapper">
+          <span class="page-tag">RESOURCES</span>
+          <h2 class="feature-title">Helpful Resources For Your Career Journey</h2>
+          <p class="feature-description">
+            Explore our collection of guides, tutorials, and tools designed to help you navigate every stage of your career development.
+          </p>
+        </div>
+        <div class="resources-grid">
+          <div class="resource-card">
+            <img src="/api/placeholder/400/200" alt="Resume Writing" class="resource-image" />
+            <div class="resource-content">
+              <span class="resource-category">Resume</span>
+              <h3 class="resource-title">Ultimate Resume Writing Guide</h3>
+              <p class="resource-description">
+                Learn how to craft a compelling resume that highlights your strengths and gets you noticed by top employers.
+              </p>
+              <a href="#" class="resource-link">Read More <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+          <div class="resource-card">
+            <img src="/api/placeholder/400/200" alt="Interview Preparation" class="resource-image" />
+            <div class="resource-content">
+              <span class="resource-category">Interviews</span>
+              <h3 class="resource-title">Ace Your Job Interviews</h3>
+              <p class="resource-description">
+                Prepare for common interview questions and learn techniques to showcase your skills effectively.
+              </p>
+              <a href="#" class="resource-link">Read More <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+          <div class="resource-card">
+            <img src="/api/placeholder/400/200" alt="Career Paths" class="resource-image" />
+            <div class="resource-content">
+              <span class="resource-category">Career Paths</span>
+              <h3 class="resource-title">Mapping Your Career Journey</h3>
+              <p class="resource-description">
+                Discover different career paths in your field and strategies for making successful career transitions.
+              </p>
+              <a href="#" class="resource-link">Read More <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="container">
+        <div class="resources-title-wrapper">
+          <span class="page-tag">FAQ</span>
+          <h2 class="feature-title">Common Questions</h2>
+          <p class="feature-description">
+            Find answers to frequently asked questions about our platform and how it works.
+          </p>
+        </div>
+
+        <div class="faq-list">
+          <div class="faq-item">
+            <div class="faq-question">
+              How does CVisionary's AI technology work?
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                Our AI technology uses a combination of natural language processing, machine learning, 
+                and proprietary algorithms to analyze resumes and job descriptions. It extracts key 
+                information such as skills, experience, and qualifications, then creates multi-dimensional 
+                profiles for matching. The system continuously learns from feedback and outcomes to 
+                improve matching accuracy over time.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              Is my data secure on your platform?
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                Absolutely. We implement enterprise-grade security measures including end-to-end 
+                encryption, secure data storage, and strict access controls. We comply with all relevant 
+                data protection regulations including GDPR and CCPA. Your data is never sold to third 
+                parties and is only used for the purposes you authorize.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              How much does it cost to use CVisionary?
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                We offer tiered pricing plans for both job seekers and employers. Job seekers can access 
+                basic features for free, with premium options available starting at $12.99/month. For 
+                employers, we offer plans based on company size and hiring volume, starting at $99/month 
+                for small businesses. Visit our pricing page for detailed information and enterprise options.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              Can I integrate CVisionary with my existing HR systems?
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                Yes, we offer robust API integrations with popular HRIS and ATS platforms including 
+                Workday, SAP SuccessFactors, Oracle HCM, BambooHR, Greenhouse, and more. Our 
+                development team can also work with you to create custom integrations for your 
+                specific systems if needed.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              How accurate is the matching algorithm?
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                Our matching algorithm achieves over 85% accuracy in predicting successful job matches, 
+                based on post-hire performance and retention metrics. We continuously refine our algorithms 
+                using machine learning and feedback loops to improve accuracy. For skills extraction 
+                specifically, our system maintains a 95% accuracy rate across all industries.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <div class="cta-content">
+          <h2 class="cta-title">Ready to Transform Your Career?</h2>
+          <p class="cta-description">
+            Join thousands of professionals who have accelerated their career growth with our AI-powered platform. Get started for free today.
+          </p>
+          <div class="cta-buttons">
+            <button class="btn btn-light">Get Started Free</button>
+            <button class="btn btn-outline-light">Request Demo</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="footer-logo">
+              <div class="footer-logo-icon">
+                <i class="fas fa-brain"></i>
+              </div>
+              CVisionary
+            </div>
+            <p class="footer-description">
+              Using AI to help professionals find their dream jobs and advance their careers with personalized recommendations and insights.
+            </p>
+            <div class="social-icons">
+              <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+          <div>
+            <h3 class="footer-heading">Product</h3>
+            <div class="footer-links">
+              <a href="#">Features</a>
+              <a href="#">How It Works</a>
+              <a href="#">Pricing</a>
+              <a href="#">Success Stories</a>
+              <a href="#">Demo</a>
+            </div>
+          </div>
+          <div>
+            <h3 class="footer-heading">Resources</h3>
+            <div class="footer-links">
+              <a href="#">Blog</a>
+              <a href="#">Career Guides</a>
+              <a href="#">Industry Reports</a>
+              <a href="#">Resume Templates</a>
+              <a href="#">Help Center</a>
+            </div>
+          </div>
+          <div>
+            <h3 class="footer-heading">Company</h3>
+            <div class="footer-links">
+              <a href="#">About Us</a>
+              <a href="#">Careers</a>
+              <a href="#">Contact</a>
+              <a href="#">Partners</a>
+              <a href="#">Press Kit</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2025 CVisionary. All rights reserved.</p>
+          <div class="footer-bottom-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Cookies</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Add any JavaScript functionality here
+      document.addEventListener("DOMContentLoaded", function () {
+        // Add scroll animation for header
+        window.addEventListener("scroll", function () {
+          const header = document.querySelector("header");
+          if (window.scrollY > 10) {
+            header.style.boxShadow = "var(--shadow)";
+            header.style.background = "rgba(255, 255, 255, 0.98)";
+          } else {
+            header.style.boxShadow = "var(--shadow-sm)";
+            header.style.background = "white";
+          }
+        });
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // Get the buttons from the main page
+        const loginButton = document.querySelector(
+          ".auth-buttons .btn-outline"
+        );
+        const getStartedButton = document.querySelector(
+          ".auth-buttons .btn-primary"
+        );
+
+        if (loginButton) {
+          loginButton.addEventListener("click", function () {
+            // Navigate to login/signup page with login tab active (default)
+            window.location.href = "login-signup.html";
+          });
+        }
+
+        if (getStartedButton) {
+          getStartedButton.addEventListener("click", function () {
+            // Navigate to login/signup page with signup tab active
+            window.location.href = "login-signup.html?tab=signup";
+          });
+        }
+
+        // On the login/signup page, check if we should show signup tab
+        const urlParams = new URLSearchParams(window.location.search);
+        const activeTab = urlParams.get("tab");
+
+        if (activeTab === "signup") {
+          // If URL has ?tab=signup, activate the signup tab
+          const loginTab = document.getElementById("login-tab");
+          const signupTab = document.getElementById("signup-tab");
+
+          if (loginTab && signupTab) {
+            loginTab.classList.remove("active");
+            signupTab.classList.add("active");
+
+            // Also switch the visible form content if needed
+            const loginForm = document.querySelector(".login-form-content");
+            const signupForm = document.querySelector(".signup-form-content");
+
+            if (loginForm && signupForm) {
+              loginForm.style.display = "none";
+              signupForm.style.display = "block";
+            }
+          }
+        }
+      });
+
+      // Add the following JavaScript code at the end of your existing script tag
+      document.addEventListener("DOMContentLoaded", function () {
+        // FAQ Accordion functionality
+        const faqQuestions = document.querySelectorAll(".faq-question");
+        
+        faqQuestions.forEach(question => {
+          question.addEventListener("click", function() {
+            // Toggle active class on the question
+            this.classList.toggle("active");
+            
+            // Toggle the answer visibility
+            const answer = this.nextElementSibling;
+            answer.classList.toggle("show");
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

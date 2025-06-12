@@ -1,0 +1,1187 @@
+--- START OF FILE upload.html ---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload Your CV - CVisionary</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      }
+
+      :root {
+        --primary: #a1c9ff;
+        --primary-dark: #4997ff;
+        --primary-light: #818cf8;
+        --secondary: #cca6ff;
+        --gray-50: #f9fafb;
+        --gray-100: #f3f4f6;
+        --gray-200: #e5e7eb;
+        --gray-300: #d1d5db;
+        --gray-400: #9ca3af;
+        --gray-500: #6b7280;
+        --gray-600: #4b5563;
+        --gray-700: #374151;
+        --gray-800: #1f2937;
+        --gray-900: #111827;
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+
+      body {
+        background-color: var(--gray-50);
+        color: var(--gray-900);
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 0 40px;
+      }
+
+      header {
+        background-color: white;
+        box-shadow: var(--shadow-sm);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        padding: 0 40px;
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0;
+        max-width: 1440px;
+        margin: 0 auto;
+        height: 80px;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+      }
+
+      .logo span {
+        color: var(--gray-900);
+      }
+
+      .logo-icon {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-light)
+        );
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 20px;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 40px;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--gray-600);
+        font-weight: 500;
+        transition: all 0.3s ease;
+        font-size: 1.05rem;
+        position: relative;
+        padding: 6px 2px;
+      }
+
+      .nav-links a:hover, .nav-links a.active {
+        color: var(--primary);
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 3px;
+        bottom: -3px;
+        left: 0;
+        background-color: var(--primary);
+        transition: width 0.3s ease;
+        border-radius: 2px;
+      }
+
+      .nav-links a:hover::after, .nav-links a.active::after {
+        width: 100%;
+      }
+
+      .auth-buttons {
+        display: flex;
+        gap: 20px;
+      }
+
+      .btn {
+        padding: 12px 24px;
+        border-radius: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: none;
+        font-size: 1rem;
+      }
+
+      .btn-outline {
+        background-color: transparent;
+        border: 2px solid var(--primary);
+        color: var(--primary);
+      }
+
+      .btn-outline:hover {
+        background-color: var(--primary);
+        color: white;
+      }
+
+      .btn-primary {
+        background-color: var(--primary);
+        color: white;
+        box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3);
+      }
+
+      .btn-primary:hover {
+        background-color: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
+      }
+
+      .upload-section {
+        padding-top: 150px;
+        padding-bottom: 100px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .upload-section::before {
+        content: "";
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        background: linear-gradient(
+          135deg,
+          rgba(79, 70, 229, 0.1),
+          rgba(129, 140, 248, 0.1)
+        );
+        border-radius: 50%;
+        top: -300px;
+        right: -200px;
+        z-index: -1;
+      }
+
+      .upload-section::after {
+        content: "";
+        position: absolute;
+        width: 400px;
+        height: 400px;
+        background: linear-gradient(
+          135deg,
+          rgba(16, 185, 129, 0.1),
+          rgba(59, 130, 246, 0.05)
+        );
+        border-radius: 50%;
+        bottom: -200px;
+        left: -100px;
+        z-index: -1;
+      }
+
+      .upload-container {
+        display: flex;
+        gap: 80px;
+        align-items: flex-start;
+      }
+
+      .upload-content {
+        flex: 1;
+        max-width: 600px;
+      }
+
+      .page-subtitle {
+        color: var(--secondary);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 24px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .page-subtitle span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        background-color: var(--secondary);
+        color: white;
+        border-radius: 50%;
+      }
+
+      .page-title {
+        font-size: 3.5rem;
+        font-weight: 800;
+        line-height: 1.1;
+        margin-bottom: 32px;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .page-description {
+        color: var(--gray-600);
+        font-size: 1.2rem;
+        line-height: 1.7;
+        margin-bottom: 40px;
+      }
+
+      .benefits-list {
+        margin-bottom: 40px;
+      }
+
+      .benefit-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+
+      .benefit-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background-color: rgba(79, 70, 229, 0.1);
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+      }
+
+      .benefit-content h4 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: var(--gray-800);
+      }
+
+      .benefit-content p {
+        color: var(--gray-600);
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+
+      .upload-form-container {
+        flex: 1;
+        background-color: white;
+        border-radius: 24px;
+        padding: 40px;
+        box-shadow: var(--shadow-lg);
+        max-width: 600px;
+      }
+
+      .upload-form-header {
+        margin-bottom: 30px;
+        text-align: center;
+      }
+
+      .upload-form-header h3 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 16px;
+        color: var(--gray-900);
+      }
+
+      .upload-form-header p {
+        color: var(--gray-600);
+        font-size: 1.1rem;
+      }
+
+      .upload-form {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .form-group label {
+        font-weight: 600;
+        color: var(--gray-700);
+        font-size: 1.05rem;
+      }
+
+      .form-control {
+        padding: 14px 18px;
+        border-radius: 12px;
+        border: 2px solid var(--gray-200);
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        width: 100%;
+      }
+
+      .form-control:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+      }
+
+      .form-control::placeholder {
+        color: var(--gray-400);
+      }
+
+      .file-upload {
+        position: relative;
+        width: 100%;
+      }
+
+      .file-upload-wrapper {
+        border: 2px dashed var(--primary);
+        border-radius: 12px;
+        padding: 40px 20px;
+        text-align: center;
+        background-color: rgba(79, 70, 229, 0.05);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .file-upload-wrapper:hover {
+        background-color: rgba(79, 70, 229, 0.1);
+      }
+
+      .file-upload-icon {
+        font-size: 2.5rem;
+        color: var(--primary);
+        margin-bottom: 16px;
+      }
+
+      .file-upload-text h4 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: var(--gray-800);
+      }
+
+      .file-upload-text p {
+        color: var(--gray-600);
+        font-size: 0.95rem;
+        margin-bottom: 16px;
+      }
+
+      .file-types {
+        font-size: 0.9rem;
+        color: var(--gray-500);
+      }
+
+      .file-upload input[type="file"] {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      .cv-preview {
+        display: none;
+        background-color: var(--gray-100);
+        border-radius: 12px;
+        padding: 16px;
+        margin-top: 20px;
+      }
+
+      .cv-preview.active {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .cv-preview-left {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .cv-preview-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 8px;
+        background-color: var(--primary);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+      }
+
+      .cv-preview-info h4 {
+        font-weight: 600;
+        color: var(--gray-800);
+        margin-bottom: 4px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 250px;
+      }
+
+      .cv-preview-info p {
+        font-size: 0.9rem;
+        color: var(--gray-500);
+      }
+
+      .cv-preview-remove {
+        color: var(--gray-500);
+        cursor: pointer;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+      }
+
+      .cv-preview-remove:hover {
+        color: #ef4444;
+      }
+
+      .form-footer {
+        margin-top: 20px;
+      }
+
+      .form-footer button {
+        width: 100%;
+        padding: 16px;
+        font-size: 1.1rem;
+        font-weight: 600;
+      }
+
+      .privacy-notice {
+        text-align: center;
+        margin-top: 24px;
+        font-size: 0.9rem;
+        color: var(--gray-500);
+      }
+
+      .privacy-notice a {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .privacy-notice a:hover {
+        text-decoration: underline;
+      }
+
+      .alert {
+        padding: 1em;
+        margin-bottom: 1em;
+        border-radius: 12px;
+      }
+
+      .alert-error {
+        background: #f8d7da;
+        color: #721c24;
+      }
+
+      .result-section {
+        margin-top: 60px;
+        padding-top: 40px;
+        border-top: 1px solid var(--gray-200);
+      }
+
+      .result-section h2 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 30px;
+        background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .resume-summary-box, .parsed-details-box {
+        background-color: white;
+        border-radius: 16px;
+        padding: 30px;
+        box-shadow: var(--shadow);
+        margin-bottom: 40px;
+        border: 1px solid var(--gray-200);
+      }
+      
+      .resume-summary-box h3, .parsed-details-box h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--gray-900);
+        margin-bottom: 20px;
+      }
+
+      .resume-summary-box p, .parsed-details-box pre {
+        color: var(--gray-700);
+        line-height: 1.7;
+        font-size: 1.05rem;
+      }
+
+      .parsed-details-box pre {
+          white-space: pre-wrap;
+          word-wrap: break-word;
+          font-family: monospace;
+          background-color: var(--gray-50);
+          padding: 15px;
+          border-radius: 8px;
+          border: 1px solid var(--gray-200);
+          max-height: 400px;
+          overflow-y: auto;
+      }
+
+
+      .job-match {
+        border: 1px solid var(--gray-200);
+        padding: 30px;
+        margin-bottom: 25px;
+        border-radius: 16px;
+        background: white;
+        box-shadow: var(--shadow-sm);
+        transition: all 0.3s ease;
+      }
+
+      .job-match:hover {
+        box-shadow: var(--shadow);
+        transform: translateY(-3px);
+      }
+
+      .job-match h3 {
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: var(--gray-900);
+      }
+
+      .job-match p {
+        color: var(--gray-600);
+        margin-bottom: 8px;
+        font-size: 1.05rem;
+      }
+
+      .job-match p strong {
+        color: var(--gray-800);
+      }
+
+      .job-match ul {
+        list-style: none;
+        padding-left: 0;
+        margin-top: 15px;
+        margin-bottom: 15px;
+      }
+
+      .job-match ul li {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 8px;
+        color: var(--gray-700);
+        font-size: 1rem;
+      }
+
+      .job-match ul li i.fa-check {
+        color: #22c55e; /* Green for matched skills */
+      }
+      .job-match ul li i.fa-times {
+        color: #ef4444; /* Red for missing skills */
+      }
+
+      .job-match h4 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        color: var(--gray-800);
+      }
+
+      .job-match .match-reasoning {
+          background-color: var(--gray-50);
+          border-left: 4px solid var(--primary);
+          padding: 15px;
+          border-radius: 8px;
+          margin-top: 20px;
+          color: var(--gray-700);
+          font-style: italic;
+          font-size: 0.95rem;
+      }
+
+      .job-link-btn {
+          display: inline-block;
+          margin-top: 20px;
+          padding: 10px 20px;
+          background-color: var(--primary);
+          color: white;
+          text-decoration: none;
+          border-radius: 8px;
+          font-weight: 600;
+          transition: all 0.3s ease;
+      }
+      .job-link-btn:hover {
+          background-color: var(--primary-dark);
+          transform: translateY(-2px);
+      }
+
+
+      footer {
+        background-color: var(--gray-900);
+        color: var(--gray-400);
+        padding: 100px 0 40px;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 60px;
+        margin-bottom: 60px;
+      }
+
+      .footer-logo {
+        color: white;
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .footer-logo-icon {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-light)
+        );
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 20px;
+      }
+
+      .footer-description {
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin-bottom: 30px;
+        opacity: 0.7;
+      }
+
+      .social-icons {
+        display: flex;
+        gap: 16px;
+      }
+
+      .social-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        font-size: 1.2rem;
+        color: white;
+        text-decoration: none;
+      }
+
+      .social-icon:hover {
+        background-color: var(--primary);
+        transform: translateY(-3px);
+      }
+
+      .footer-heading {
+        color: white;
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 30px;
+      }
+
+      .footer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .footer-links a {
+        color: var(--gray-400);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-size: 1.05rem;
+      }
+
+      .footer-links a:hover {
+        color: white;
+        transform: translateX(5px);
+      }
+
+      .footer-bottom {
+        padding-top: 40px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .footer-bottom-links {
+        display: flex;
+        gap: 30px;
+      }
+
+      .footer-bottom-links a {
+        color: var(--gray-500);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-size: 0.95rem;
+      }
+
+      .footer-bottom-links a:hover {
+        color: white;
+      }
+
+      @media (max-width: 1200px) {
+        .upload-container {
+          flex-direction: row;
+          gap: 50px;
+        }
+
+        .upload-content, 
+        .upload-form-container {
+          max-width: 50%;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 0 20px;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .page-title {
+          font-size: 2.5rem;
+        }
+
+        .upload-container {
+          flex-direction: column;
+        }
+
+        .upload-content, 
+        .upload-form-container {
+          max-width: 100%;
+        }
+
+        .footer-grid {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+
+        .footer-bottom {
+          flex-direction: column;
+          gap: 20px;
+          text-align: center;
+        }
+
+        .footer-bottom-links {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="{{ url_for('index') }}" class="logo">
+          <div class="logo-icon">
+            <i class="fas fa-brain"></i>
+          </div>
+          CVisionary
+        </a>
+        <div class="nav-links">
+          <a href="{{ url_for('features') }}">Features</a>
+          <a href="{{ url_for('index') }}#how-it-works">How It Works</a>
+          <a href="{{ url_for('index') }}#pricing">Pricing</a>
+          <a href="{{ url_for('upload') }}" class="active">Upload</a>
+          <a href="{{ url_for('index') }}#about-us">About Us</a>
+        </div>
+        <div class="auth-buttons">
+          <a href="{{ url_for('login_signup') }}" class="btn btn-outline">Log In</a>
+          <a href="{{ url_for('login_signup') }}?tab=signup" class="btn btn-primary">Get Started</a>
+        </div>
+      </nav>
+    </header>
+
+    <section class="upload-section">
+      <div class="container">
+        <div class="upload-container">
+          <div class="upload-content">
+            <p class="page-subtitle">
+              <span><i class="fas fa-file-alt"></i></span> RESUME UPLOAD
+            </p>
+            <h1 class="page-title">Upload Your CV & Find Your Dream Job</h1>
+            <p class="page-description">
+              Our AI will analyze your resume, extract your skills and experience, and match you with jobs that align with your career goals. Get personalized job recommendations in minutes.
+            </p>
+
+            <div class="benefits-list">
+              <div class="benefit-item">
+                <div class="benefit-icon">
+                  <i class="fas fa-bolt"></i>
+                </div>
+                <div class="benefit-content">
+                  <h4>Instant Analysis</h4>
+                  <p>Our AI analyzes your resume in seconds, identifying key skills, experience, and qualifications.</p>
+                </div>
+              </div>
+
+              <div class="benefit-item">
+                <div class="benefit-icon">
+                  <i class="fas fa-bullseye"></i>
+                </div>
+                <div class="benefit-content">
+                  <h4>Perfect Job Matches</h4>
+                  <p>Get matched with jobs that align with your skills and career goals, with 93% matching accuracy.</p>
+                </div>
+              </div>
+
+              <div class="benefit-item">
+                <div class="benefit-icon">
+                  <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="benefit-content">
+                  <h4>Skills Gap Analysis</h4>
+                  <p>Identify skills you need to develop to qualify for your dream job and get personalized recommendations.</p>
+                </div>
+              </div>
+
+              <div class="benefit-item">
+                <div class="benefit-icon">
+                  <i class="fas fa-lock"></i>
+                </div>
+                <div class="benefit-content">
+                  <h4>Secure & Private</h4>
+                  <p>Your data is encrypted and secure. We never share your information without your explicit permission.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="upload-form-container">
+            <div class="upload-form-header">
+              <h3>Upload Your Resume</h3>
+              <p>Start your career journey with just one click</p>
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+
+            <form id="cv-upload-form" method="POST" enctype="multipart/form-data" action="{{ url_for('upload') }}">
+              <div class="form-group">
+                <label>Upload CV/Resume</label>
+                <div class="file-upload">
+                  <div class="file-upload-wrapper" id="file-upload-area">
+                    <div class="file-upload-icon">
+                      <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <div class="file-upload-text">
+                      <h4>Drag & Drop your file here</h4>
+                      <p>or click to browse from your computer</p>
+                      <span class="file-types">Supported formats: PDF, DOCX, DOC, RTF (Max 5MB)</span>
+                    </div>
+                    <input type="file" id="cv-file" name="resume" accept=".pdf,.docx,.doc,.rtf" required />
+                  </div>
+                  <div class="cv-preview" id="cv-preview">
+                    <div class="cv-preview-left">
+                      <div class="cv-preview-icon">
+                        <i class="fas fa-file-alt"></i>
+                      </div>
+                      <div class="cv-preview-info">
+                        <h4 id="file-name">filename.pdf</h4>
+                        <p id="file-size">0 KB</p>
+                      </div>
+                    </div>
+                    <div class="cv-preview-remove" id="remove-file">
+                      <i class="fas fa-times"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-footer">
+                <button type="submit" class="btn btn-primary">Upload & Find Matches</button>
+              </div>
+            </form>
+            <p class="privacy-notice">
+              By uploading your resume, you agree to our 
+              <a href="#">Terms of Service</a> and 
+              <a href="#">Privacy Policy</a>
+            </p>
+          </div>
+        </div>
+
+        {% if resume_summary %}
+          <div class="result-section">
+            <div class="resume-summary-box">
+              <h3>Screened Resume Summary</h3>
+              <p>{{ resume_summary }}</p>
+            </div>
+            <div class="parsed-details-box">
+              <h3>Parsed Resume Details (Raw)</h3>
+              <pre>{{ resume_data | tojson(indent=2) }}</pre>
+            </div>
+          </div>
+        {% endif %}
+
+        {% if matched_jobs %}
+          <div class="result-section">
+            <h2>Top Job Matches</h2>
+            {% for job in matched_jobs %}
+              <div class="job-match">
+                <h3>#{{ loop.index }}: {{ job.job_title|default('Unknown Position') }} - {{ job.company|default('Unknown Company') }}</h3>
+                {% if job.location %}
+                <p><strong>Location:</strong> {{ job.location }}</p>
+                {% endif %}
+                <p><strong>Experience Level:</strong> {{ job.experience_level|default('Not specified') }}</p>
+                <p><strong>Match Score:</strong> {{ job.match_details.match_score|default(0) }}% ({{ job.match_details.job_fit|default('Unknown') }})</p>
+                <h4>Matched Skills:</h4>
+                <ul>
+                  {% for skill in job.match_details.matched_skills|default([]) %}
+                    <li><i class="fas fa-check"></i> {{ skill }}</li>
+                  {% endfor %}
+                </ul>
+                <h4>Missing Skills:</h4>
+                <ul>
+                  {% if job.match_details.missing_skills|default([])|length > 0 %}
+                    {% for skill in job.match_details.missing_skills %}
+                      <li><i class="fas fa-times"></i> <strong>{{ skill }}</strong></li>
+                    {% endfor %}
+                  {% else %}
+                    <li>No critical missing skills identified.</li>
+                  {% endif %}
+                </ul>
+                <h4>Match Reasoning:</h4>
+                <p class="match-reasoning">{{ job.match_details.match_reasoning|default('No reasoning provided') }}</p>
+                {% if job.requirements %}
+                <h4>Job Requirements:</h4>
+                <ul>
+                  {% for req in job.requirements %}
+                    <li>{{ req }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+                {% if job.job_url %}
+                    <a href="{{ job.job_url }}" target="_blank" rel="noopener noreferrer" class="job-link-btn">View Job on LinkedIn <i class="fas fa-external-link-alt"></i></a>
+                {% endif %}
+              </div>
+            {% endfor %}
+            <a href="{{ url_for('download_results', matched_jobs=matched_jobs|tojson) }}" class="btn btn-primary">Download Results (JSON)</a>
+          </div>
+        {% endif %}
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="footer-logo">
+              <div class="footer-logo-icon">
+                <i class="fas fa-brain"></i>
+              </div>
+              CVisionary
+            </div>
+            <p class="footer-description">
+              Using artificial intelligence to revolutionize how talent and
+              opportunities connect, making recruitment smarter, faster, and
+              more effective.
+            </p>
+            <div class="social-icons">
+              <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="footer-heading">Product</h3>
+            <div class="footer-links">
+              <a href="{{ url_for('features') }}">Features</a>
+              <a href="{{ url_for('index') }}#pricing">Pricing</a>
+              <a href="#">Case Studies</a>
+              <a href="#">Reviews</a>
+              <a href="#">Updates</a>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="footer-heading">Company</h3>
+            <div class="footer-links">
+              <a href="{{ url_for('index') }}#about-us">About Us</a>
+              <a href="#">Careers</a>
+              <a href="#">Blog</a>
+              <a href="#">Press</a>
+              <a href="#">Contact</a>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="footer-heading">Resources</h3>
+            <div class="footer-links">
+              <a href="#">Support</a>
+              <a href="#">Documentation</a>
+              <a href="#">API</a>
+              <a href="#">Community</a>
+              <a href="#">Partners</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© 2025 CVisionary AI. All rights reserved.</p>
+          <div class="footer-bottom-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Cookie Policy</a>
+            <a href="#">Sitemap</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Add scroll animation for header
+        window.addEventListener("scroll", function () {
+          const header = document.querySelector("header");
+          if (window.scrollY > 10) {
+            header.style.boxShadow = "var(--shadow)";
+            header.style.background = "rgba(255, 255, 255, 0.98)";
+          } else {
+            header.style.boxShadow = "var(--shadow-sm)";
+            header.style.background = "white";
+          }
+        });
+
+        const fileInput = document.getElementById("cv-file");
+        const fileUploadArea = document.getElementById("file-upload-area");
+        const cvPreview = document.getElementById("cv-preview");
+        const fileName = document.getElementById("file-name");
+        const fileSize = document.getElementById("file-size");
+        const removeFile = document.getElementById("remove-file");
+
+        fileUploadArea.addEventListener("dragover", function(e) {
+          e.preventDefault();
+          fileUploadArea.style.backgroundColor = "rgba(79, 70, 229, 0.1)";
+        });
+
+        fileUploadArea.addEventListener("dragleave", function() {
+          fileUploadArea.style.backgroundColor = "rgba(79, 70, 229, 0.05)";
+        });
+
+        fileUploadArea.addEventListener("drop", function(e) {
+          e.preventDefault();
+          fileUploadArea.style.backgroundColor = "rgba(79, 70, 229, 0.05)";
+          if (e.dataTransfer.files.length) {
+            fileInput.files = e.dataTransfer.files;
+            updateFilePreview();
+          }
+        });
+
+        fileInput.addEventListener("change", updateFilePreview);
+
+        function updateFilePreview() {
+          if (fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+            fileName.textContent = file.name;
+            fileSize.textContent = formatFileSize(file.size);
+            cvPreview.classList.add("active");
+            fileUploadArea.style.display = "none";
+          }
+        }
+
+        removeFile.addEventListener("click", function() {
+          fileInput.value = "";
+          cvPreview.classList.remove("active");
+          fileUploadArea.style.display = "block";
+        });
+
+        function formatFileSize(bytes) {
+          if (bytes === 0) return '0 Bytes';
+          const k = 1024;
+          const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+          const i = Math.floor(Math.log(bytes) / Math.log(k));
+          return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        const form = document.getElementById("cv-upload-form");
+        form.addEventListener("submit", function(e) {
+          if (fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+            if (file.size > 5 * 1024 * 1024) {
+              e.preventDefault();
+              alert("File size exceeds 5MB limit. Please upload a smaller file.");
+              return;
+            }
+
+            const submitButton = form.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+          } else {
+            e.preventDefault();
+            alert("Please upload your resume before submitting.");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
